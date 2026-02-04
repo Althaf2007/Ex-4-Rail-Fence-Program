@@ -20,44 +20,37 @@ STEP-5: Read the characters row wise or column wise in the former order to get t
 
 # PROGRAM
 ```
- #include <stdio.h>
+#include <stdio.h>
 #include <string.h>
-#include <ctype.h>
-void encryptRailFence(char *message, int rails) {
-    int len = strlen(message);
-    char rail[rails][len];
-    for (int i = 0; i < rails; i++)
-        for (int j = 0; j < len; j++)
-            rail[i][j] = '\n';
-    int row = 0;
-    int direction = 1;
-    for (int i = 0; i < len; i++) {
-        rail[row][i] = message[i];
-        row += direction;
-        if (row == rails - 1 || row == 0)
-            direction = -direction;
-    }
-    printf("Encrypted text: ");
-    for (int i = 0; i < rails; i++)
-        for (int j = 0; j < len; j++)
-            if (rail[i][j] != '\n')
-                printf("%c", rail[i][j]);
-    printf("\n");
+
+void rail(char *t,int r,int d)
+{
+int l=strlen(t),i,j,k=0,dir=1,row=0; 
+char a[r][l];
+for(i=0;i<r;i++)for(j=0;j<l;j++)a[i][j]='\n';
+for(i=0;i<l;i++){a[row][i]=d?'*':t[i]; 
+row+=dir; 
+if(row==0||row==r-1)dir=-dir;}
+if(d){for(i=0;i<r;i++)for(j=0;j<l;j++)if(a[i][j]=='*')a[i][j]=t[k++];
 }
-int main() {
-    char message[100];
-    int rails;
-    printf("Enter a Secret Message: ");
-    scanf(" %[^\n]", message); 
-    printf("Enter number of rails: ");
-    scanf("%d", &rails);
-    encryptRailFence(message, rails);
-    return 0;
+row=0;dir=1;
+for(i=0;i<l;i++){t[i]=a[row][i];
+row+=dir; if(row==0||row==r-1)dir=-dir;
+}
+}
+int main()
+{
+char m[50]; int r;
+printf("Enter message: "); scanf(" %[^\n]",m);
+printf("Rails: "); scanf("%d",&r);
+rail(m,r,0); printf("Encrypted: %s\n",m);
+rail(m,r,1); printf("Decrypted: %s\n",m);
+}
 }
 ```
 # OUTPUT
 
-<img width="1640" height="931" alt="Screenshot 2026-02-04 090545" src="https://github.com/user-attachments/assets/18774ca1-6ed2-488d-b776-4d659a2c50ea" />
+<img width="1742" height="933" alt="Screenshot 2026-02-04 091730" src="https://github.com/user-attachments/assets/4c81a595-3157-47e9-b36e-2b98461f03e5" />
 
 # RESULT
 
